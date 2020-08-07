@@ -1,6 +1,9 @@
 package scrabble
 
-import "strings"
+import (
+	"strings"
+	"unicode"
+)
 
 const onePoints = "A, E, I, O, U, L, N, R, S, T"
 const twoPoints = "D, G"
@@ -12,27 +15,24 @@ const tenPoints = "Q, Z"
 
 // Score calculate how much point a word sum in scrabble game
 func Score(word string) int {
-	w := []rune(word)
 	var c int
-
-	for i := range w {
-		l := strings.ToUpper(string(w[i]))
+	for _, r := range word {
+		r = unicode.ToUpper(r)
 		switch {
-		case strings.Contains(onePoints, l):
+		case strings.ContainsRune(onePoints, r):
 			c++
-		case strings.Contains(twoPoints, l):
+		case strings.ContainsRune(twoPoints, r):
 			c += 2
-		case strings.Contains(threePoints, l):
+		case strings.ContainsRune(threePoints, r):
 			c += 3
-		case strings.Contains(fourPoints, l):
+		case strings.ContainsRune(fourPoints, r):
 			c += 4
-		case strings.Contains(fivePoints, l):
+		case strings.ContainsRune(fivePoints, r):
 			c += 5
-		case strings.Contains(eightPoints, l):
+		case strings.ContainsRune(eightPoints, r):
 			c += 8
-		case strings.Contains(tenPoints, l):
+		case strings.ContainsRune(tenPoints, r):
 			c += 10
-
 		}
 	}
 	return c
