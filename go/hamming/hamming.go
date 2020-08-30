@@ -10,7 +10,7 @@ func Distance(a, b string) (int, error) {
 	aRune, bRune := []rune(a), []rune(b)
 
 	if len(aRune) != len(bRune) {
-		return 0, errors.New("the dna samples have different lenght")
+		return 0, errors.New("the dna samples have different length")
 	}
 
 	var c = 0
